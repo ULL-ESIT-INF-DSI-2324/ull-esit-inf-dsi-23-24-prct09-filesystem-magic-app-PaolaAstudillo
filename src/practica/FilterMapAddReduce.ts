@@ -1,18 +1,12 @@
 import { NumberListProcessor } from '../practica/NumberListProcessor.js';
 
-/**
- * Clase FilterMapAddReduce que extiende de NumberListProcessor.
- * Se especializa en aplicar una operación de reducción que suma todos los elementos de un arreglo.
- */
 export class FilterMapAddReduce extends NumberListProcessor {
-    
-    /**
-     * Aplica una operación de reducción que suma todos los elementos del arreglo.
-     * @param numbers El arreglo de números a procesar.
-     * @returns La suma de todos los elementos del arreglo.
-     */
     protected reduce(numbers: number[]): number {
-        return numbers.reduce((acc, curr) => acc + curr, 0);
+        let result = 0;
+        for (let num of numbers) {
+            result += num;
+        }
+        return result;
     }
 
     /**

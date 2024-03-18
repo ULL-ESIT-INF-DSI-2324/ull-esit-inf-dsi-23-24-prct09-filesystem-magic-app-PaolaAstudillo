@@ -6,24 +6,22 @@ import { NumberListProcessor } from '../practica/NumberListProcessor.js';
  * multiplicar todos los elementos de un arreglo de números.
  */
 export class FilterMapProdReduce extends NumberListProcessor {
-
-    /**
-     * Implementa la operación de reducción multiplicando todos
-     * los elementos del arreglo.
-     * @param numbers El arreglo de números a reducir.
-     * @returns El producto de todos los números del arreglo.
-     */
     protected reduce(numbers: number[]): number {
-        return numbers.reduce((acc, curr) => acc * curr, 1);
+        let result = 1;
+        for (let num of numbers) {
+            result *= num;
+        }
+        return result;
     }
 
     /**
      * Método hook opcional que se ejecuta después de filtrar los números.
      * @param filteredNumbers Los números después de aplicar el filtro.
      */
+    //estos metodos se ejecutan despues de las operaciones de filtrado y mapeo
     protected afterFiltering(filteredNumbers: number[]): void {
         console.log('FilterMapProdReduce - After filtering:', filteredNumbers);
-    }
+    } //imprem¡imen los numeros despues del filtrado
 
     /**
      * Método hook opcional que se ejecuta después de mapear los números.

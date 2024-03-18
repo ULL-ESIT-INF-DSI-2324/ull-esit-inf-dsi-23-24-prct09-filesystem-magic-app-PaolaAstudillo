@@ -13,18 +13,26 @@ export abstract class NumberListProcessor {
     public processNumbers(numbers: number[]): number {
         const filteredNumbers = this.filter(numbers);
         this.afterFiltering(filteredNumbers);
+        //ejecuta metodo hook
+        //es un punto de extensión donde las subclases pueden agregar lógica adicional 
+        //después de la operación de filtrado.
         const mappedNumbers = this.map(filteredNumbers);
+        //llama a map en el arreglo ya filtrado de nates
         this.afterMapping(mappedNumbers);
+        //hook despues de mapear, punto de extension para subclases
         return this.reduce(mappedNumbers);
+        //reduce implementado por las subclaases
     }
 
-    /**
-     * Realiza un filtrado en la lista de números usando el predicado proporcionado por `filterPredicate`.
-     * @param numbers Lista de números a filtrar.
-     * @returns Lista de números filtrados.
-     */
     protected filter(numbers: number[]): number[] {
-        return numbers.filter(this.filterPredicate);
+        let result: number[] = [];
+        for (let num of numbers) {
+            if (this.filterPredicate(num)) {
+                //si cumple con lo definido en filterpredicate
+                result.push(num);
+            }
+        }
+        return result;
     }
 
     /**
@@ -33,7 +41,12 @@ export abstract class NumberListProcessor {
      * @returns Lista de números transformados.
      */
     protected map(numbers: number[]): number[] {
-        return numbers.map(this.mapFunction);
+        let result: number[] = [];
+        for (let num of numbers) {
+            result.push(this.mapFunction(num));
+            //en mapfunction esta la funcion de transformacion
+        }
+        return result;
     }
 
     /**
@@ -49,6 +62,7 @@ export abstract class NumberListProcessor {
      * @param n El número a evaluar en el filtro.
      * @returns `true` si el número cumple con el criterio de filtrado; de lo contrario, `false`.
      */
+    
     protected filterPredicate(n: number): boolean {
         return n !== null; // Ejemplo de implementación
     }
@@ -69,6 +83,8 @@ export abstract class NumberListProcessor {
      */
     protected afterFiltering(filteredNumbers: number[]): void {
         // Hook después de filtrar
+        //no hace nada, pero proporciona un punto donde
+        //las subclases pueden implementar lógica adicional.
     }
 
     /**

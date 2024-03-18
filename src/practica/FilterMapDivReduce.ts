@@ -7,22 +7,15 @@ import { NumberListProcessor } from '../practica/NumberListProcessor.js';
  * métodos hook afterFiltering y afterMapping.
  */
 export class FilterMapDivReduce extends NumberListProcessor {
-    /**
-     * Realiza la operación de reducción en el arreglo de números.
-     * Esta implementación específica divide todos los elementos del arreglo.
-     * Si el primer elemento es 0 o el arreglo está vacío, lanza un error para 
-     * prevenir la división por cero.
-     * @param numbers Arreglo de números a reducir.
-     * @returns El resultado de dividir sucesivamente todos los elementos del arreglo.
-     * @throws Error si el arreglo está vacío o el primer elemento es 0.
-     */
     protected reduce(numbers: number[]): number {
         if (numbers.length === 0 || numbers[0] === 0) {
             throw new Error("Division by zero error in reduce operation.");
         }
-        return numbers.reduce((acc, curr, index) => {
-            return index === 0 ? curr : acc / curr;
-        });
+        let result = numbers[0];
+        for (let i = 1; i < numbers.length; i++) {
+            result /= numbers[i];
+        }
+        return result;
     }
 
     /**
@@ -30,6 +23,7 @@ export class FilterMapDivReduce extends NumberListProcessor {
      * Este método imprime en consola los números después de haber sido filtrados.
      * @param filteredNumbers Los números después de aplicar la operación de filtrado.
      */
+    //realizar acciones adicionales despues de cada etpa del proceso
     protected afterFiltering(filteredNumbers: number[]): void {
         console.log('FilterMapDivReduce - After filtering:', filteredNumbers);
     }

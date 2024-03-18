@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { FilterMapSubReduce } from '../src/practica/FilterMapSubReduce.js';
 import { FilterMapProdReduce } from '../src/practica/FilterMapProdReduce.js';
 import { FilterMapDivReduce } from '../src/practica/FilterMapDivReduce.js';
+import { FilterMapAddReduce } from '../src/practica/FilterMapAddReduce.js';
 
 describe('Pruebas de NumberListProcessor', () => {
 
@@ -60,4 +61,22 @@ describe('Pruebas de NumberListProcessor', () => {
     });
   });
 
+  describe('Pruebas de FilterMapAddReduce', () => {
+    const processor = new FilterMapAddReduce();
+
+    it('debería sumar todos los elementos', () => {
+        const resultado = processor.processNumbers([2, 3, 4]);
+        expect(resultado).to.equal(9); // 2 + 3 + 4 = 9
+    });
+
+    it('debería retornar el único elemento para un arreglo con un elemento', () => {
+        const resultado = processor.processNumbers([7]);
+        expect(resultado).to.equal(7);
+    });
+
+    it('debería retornar 0 para un arreglo vacío', () => {
+        const resultado = processor.processNumbers([]);
+        expect(resultado).to.equal(0);
+    });
+});
 });
