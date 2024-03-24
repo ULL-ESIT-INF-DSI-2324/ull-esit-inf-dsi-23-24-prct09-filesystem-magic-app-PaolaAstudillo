@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Updated Test Card",
+    "manaCost": 2,
+    "color": "Green",
+    "type": "Sorcery",
+    "rarity": "Uncommon",
+    "text": "Updated rule",
+    "marketValue": 150
+  }
+]

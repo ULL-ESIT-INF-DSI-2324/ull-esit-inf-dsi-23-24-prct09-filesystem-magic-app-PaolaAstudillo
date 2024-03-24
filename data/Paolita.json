@@ -1,0 +1,29 @@
+[
+  {
+    "id": 2,
+    "name": "aeiou",
+    "manaCost": 10020,
+    "color": "Red",
+    "type": "Land",
+    "rarity": "Rare",
+    "marketValue": 514
+  },
+  {
+    "id": 1,
+    "name": "lala",
+    "manaCost": 1000,
+    "color": "Blue",
+    "type": "Land",
+    "rarity": "Rare",
+    "marketValue": 14
+  },
+  {
+    "id": 3,
+    "name": "tre",
+    "manaCost": 1000,
+    "color": "White",
+    "type": "Land",
+    "rarity": "Rare",
+    "marketValue": 14
+  }
+]

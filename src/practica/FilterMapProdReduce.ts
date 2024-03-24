@@ -8,7 +8,7 @@ import { NumberListProcessor } from '../practica/NumberListProcessor.js';
 export class FilterMapProdReduce extends NumberListProcessor {
     protected reduce(numbers: number[]): number {
         let result = 1;
-        for (let num of numbers) {
+        for (const num of numbers) {
             result *= num;
         }
         return result;

@@ -25,8 +25,8 @@ export abstract class NumberListProcessor {
     }
 
     protected filter(numbers: number[]): number[] {
-        let result: number[] = [];
-        for (let num of numbers) {
+        const result: number[] = [];
+        for (const num of numbers) {
             if (this.filterPredicate(num)) {
                 //si cumple con lo definido en filterpredicate
                 result.push(num);
@@ -41,8 +41,8 @@ export abstract class NumberListProcessor {
      * @returns Lista de números transformados.
      */
     protected map(numbers: number[]): number[] {
-        let result: number[] = [];
-        for (let num of numbers) {
+        const result: number[] = [];
+        for (const num of numbers) {
             result.push(this.mapFunction(num));
             //en mapfunction esta la funcion de transformacion
         }
