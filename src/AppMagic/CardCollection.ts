@@ -110,8 +110,19 @@ export class MagicCardCollection {
     console.log(chalk.green('Listing all cards:'));
     this.cards.forEach(card => {
       const colorFunc = this.getColorFunction(card.color);
-      console.log(colorFunc(`ID: ${card.id}, Name: ${card.name}, Color: ${card.color}`));
-    });
+      console.log(colorFunc(
+        `ID: ${card.id}, ` +
+        `Name: ${card.name}, ` +
+        `Mana Cost: ${card.manaCost}, ` +
+        `Color: ${card.color}, ` +
+        `Type: ${card.type}, ` +
+        `Rarity: ${card.rarity}, ` +
+        `Text: ${card.text}, ` +
+        `Market Value: ${card.marketValue}, ` +
+        `${card.powerToughness ? `Power/Toughness: ${card.powerToughness[0]}/${card.powerToughness[1]}, ` : ''}` +
+        `${card.loyalty ? `Loyalty: ${card.loyalty}` : ''}`
+    ));
+});
   }
 
   /**

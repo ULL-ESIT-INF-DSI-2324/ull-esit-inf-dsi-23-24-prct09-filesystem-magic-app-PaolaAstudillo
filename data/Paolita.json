@@ -1,7 +1,7 @@
 [
   {
     "id": 2,
-    "name": "aeiou",
+    "name": "Black Lotus",
     "manaCost": 10020,
     "color": "Red",
     "type": "Land",
@@ -10,11 +10,11 @@
   },
   {
     "id": 1,
-    "name": "lala",
-    "manaCost": 1000,
+    "name": "Time Walk'",
+    "manaCost": 250,
     "color": "Blue",
-    "type": "Land",
-    "rarity": "Rare",
+    "type": "Creature",
+    "rarity": "Common",
     "marketValue": 14
   },
   {
@@ -22,8 +22,8 @@
     "name": "tre",
     "manaCost": 1000,
     "color": "White",
-    "type": "Land",
-    "rarity": "Rare",
+    "type": "Artifact",
+    "rarity": "Mythic",
     "marketValue": 14
   }
 ]

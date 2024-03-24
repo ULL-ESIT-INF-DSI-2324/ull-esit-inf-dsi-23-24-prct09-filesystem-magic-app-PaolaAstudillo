@@ -1,0 +1,29 @@
+[
+  {
+    "id": 10,
+    "name": "Mox Sapphire",
+    "manaCost": 1000,
+    "color": "Yellow",
+    "type": "Land",
+    "rarity": "Rare",
+    "marketValue": 14
+  },
+  {
+    "id": 9,
+    "name": "Mox Emerald",
+    "manaCost": 105,
+    "color": "Grey",
+    "type": "Creature",
+    "rarity": "Common",
+    "marketValue": 50
+  },
+  {
+  "id": 8,
+  "name": "Black Lotus 2",
+  "manaCost": 66,
+  "color": "Green",
+  "type": "Artifact",
+  "rarity": "Common",
+  "marketValue": 50
+}
+]
