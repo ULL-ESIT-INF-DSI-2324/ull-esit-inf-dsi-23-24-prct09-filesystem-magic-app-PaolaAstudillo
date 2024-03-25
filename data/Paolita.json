@@ -1,29 +1,29 @@
 [
-  {
-    "id": 2,
-    "name": "Black Lotus",
-    "manaCost": 10020,
-    "color": "Red",
-    "type": "Land",
-    "rarity": "Rare",
-    "marketValue": 514
-  },
-  {
-    "id": 1,
-    "name": "Time Walk'",
-    "manaCost": 250,
-    "color": "Blue",
-    "type": "Creature",
-    "rarity": "Common",
-    "marketValue": 14
-  },
-  {
-    "id": 3,
-    "name": "tre",
-    "manaCost": 1000,
-    "color": "White",
-    "type": "Artifact",
-    "rarity": "Mythic",
-    "marketValue": 14
-  }
-]
+    {
+      "id": 2,
+      "name": "Black Lotus",
+      "manaCost": 10020,
+      "color": "Red",
+      "type": "Land",
+      "rarity": "Rare",
+      "marketValue": 514
+    },
+    {
+      "id": 1,
+      "name": "Time Walk'",
+      "manaCost": 250,
+      "color": "Blue",
+      "type": "Creature",
+      "rarity": "Common",
+      "marketValue": 14
+    },
+    {
+      "id": 3,
+      "name": "tre",
+      "manaCost": 1000,
+      "color": "White",
+      "type": "Artifact",
+      "rarity": "Mythic",
+      "marketValue": 14
+    }
+  ]

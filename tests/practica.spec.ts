@@ -3,7 +3,7 @@ import { FilterMapSubReduce } from '../src/practica/FilterMapSubReduce.js';
 import { FilterMapProdReduce } from '../src/practica/FilterMapProdReduce.js';
 import { FilterMapDivReduce } from '../src/practica/FilterMapDivReduce.js';
 import { FilterMapAddReduce } from '../src/practica/FilterMapAddReduce.js';
-
+import "mocha";
 describe('Pruebas de NumberListProcessor', () => {
 
   describe('Pruebas de FilterMapSubReduce', () => {
