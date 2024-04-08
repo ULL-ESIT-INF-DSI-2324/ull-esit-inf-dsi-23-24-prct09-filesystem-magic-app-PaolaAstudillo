@@ -4,41 +4,23 @@ import { dirname, join } from 'path';
 import fs from "fs";
 import chalk from 'chalk';
 
-/**
- * Clase que representa una colección de cartas mágicas.
- */
 export class MagicCardCollection {
   private cards: Map<number, MagicCard>;
 
-  /**
-   * Constructor de la clase MagicCardCollection.
-   * @param username El nombre de usuario asociado a la colección.
-   */
   constructor(private username: string) {
     this.cards = new Map();
     this.loadCollection();
   }
 
-  /**
-   * Obtiene la ruta del archivo de la colección del usuario.
-   * @returns La ruta del archivo de la colección.
-   */
   getCollectionFilePath() {
     const __dirname = dirname(fileURLToPath(import.meta.url));
     return join(__dirname, '../../data', `${this.username}.json`);
   }
 
-  /**
-   * Verifica si el archivo de la colección del usuario existe.
-   * @returns True si existe, False en caso contrario.
-   */
   userFileExists() {
     return fs.existsSync(this.getCollectionFilePath());
   }
 
-  /**
-   * Carga la colección de cartas desde el archivo del usuario.
-   */
   loadCollection() {
     const filePath = this.getCollectionFilePath();
     if (this.userFileExists()) {
@@ -47,30 +29,47 @@ export class MagicCardCollection {
       cardData.forEach(card => this.cards.set(card.id, card));
     }
   }
-
-  /**
-   * Escribe la colección actual en el archivo del usuario.
-   */
-  private writeCollection(): void {
+  //creamos metodo para escribir en el archivo de forma asincrona
+  private writeCollectionAsync(callback: (error?: string) => void): void {
     const filePath = this.getCollectionFilePath();
-    const cardData = Array.from(this.cards.values());
-    fs.writeFileSync(filePath, JSON.stringify(cardData, null, 2));
+    const cardData = Array.from(this.cards.values());//contiene todas las cartas de la coleccion
+    //fs.writeFile: metodo asincrono para escribir archivos
+    //JSON.Stringify convierte el objeto cardData en cadena JSON.
+    fs.writeFile(filePath, JSON.stringify(cardData, null, 2), (err) => { //null, 2 para formatear salida, mas legible
+      //fs.write toma la ruta y los domainToASCII(json)
+      if (err) {
+        console.error(chalk.red(`Error writing to file: ${err.message}`));
+        callback(`Error writing to file: ${err.message}`);
+        return;
+      }
+      //funcion anonima (función que se definirá más tarde en cada metodo)
+      callback(); //ejecuta si la operacion de escritura exitosa
+    });
   }
 
-  /**
-   * Añade una carta a la colección.
-   * @param card La carta a añadir.
-   */
   public addCard(card: MagicCard): void {
-    if (this.cards.has(card.id)) {
-      console.error(chalk.red(`Error: Card with ID ${card.id} already exists.`));
-      return;
+    try {
+      if (this.cards.has(card.id)) { // Verificar si la carta ya existe
+        console.error(chalk.red(`Error: Card with ID ${card.id} already exists.`));
+        return;
+      }
+      // Si la carta no existe en la colección, la añade al mapa 'this.cards'.
+      this.cards.set(card.id, card); // Agregar la carta al mapa si no existe
+  
+      // Llamar a writeCollectionAsync y pasar un callback para manejar la respuesta
+      this.writeCollectionAsync((error) => {
+        if (error) {
+          console.error(chalk.red(`Error writing to file: ${error}`)); // Manejar el error de escritura
+          return;
+        }
+        console.log(chalk.green(`Card with ID ${card.id} added.`)); // Confirmar que la carta se agregó
+      });
+    } catch (error) {
+      // Capturar y manejar cualquier otro error que ocurra durante addCard
+      console.error(chalk.red(`Error in addCard: ${error}`));
     }
-    this.cards.set(card.id, card);
-    this.writeCollection();
-    console.log(chalk.green(`Card with ID ${card.id} added.`));
   }
-
+  
   /**
    * Actualiza una carta en la colección.
    * @param card La carta actualizada.
@@ -81,8 +80,13 @@ export class MagicCardCollection {
       return;
     }
     this.cards.set(card.id, card);
-    this.writeCollection();
-    console.log(chalk.green(`Card with ID ${card.id} updated.`));
+    this.writeCollectionAsync(() => {
+      if (Error) {
+        console.error(chalk.red(Error));
+        return;
+      }
+      console.log(chalk.green(`Card with ID ${card.id} updated.`));
+    });
   }
 
   /**
@@ -95,8 +99,13 @@ export class MagicCardCollection {
       return;
     }
     this.cards.delete(cardId);
-    this.writeCollection();
-    console.log(chalk.green(`Card with ID ${cardId} deleted.`));
+    this.writeCollectionAsync(() => {
+      if (Error) {
+        console.error(chalk.red(Error));
+        return;
+      }
+      console.log(chalk.green(`Card with ID ${cardId} deleted.`));
+    });
   }
 
   /**
@@ -145,19 +154,18 @@ export class MagicCardCollection {
    * @param color El color de la carta.
    * @returns La función chalk correspondiente al color.
    */
-private getColorFunction(color: string) {
+  private getColorFunction(color: string) {
     switch (color.toLowerCase()) {
-        case 'white': return chalk.white;
-        case 'blue': return chalk.blue;
-        case 'black': return chalk.black;
-        case 'red': return chalk.red;
-        case 'green': return chalk.green;
-        case 'yellow': return chalk.yellow;
-        case 'cyan': return chalk.cyan;
-        case 'grey': return chalk.gray;
-        case 'magenta': return chalk.magenta;
-        
-        default: return chalk.white;
+      case 'white': return chalk.white;
+      case 'blue': return chalk.blue;
+      case 'black': return chalk.black;
+      case 'red': return chalk.red;
+      case 'green': return chalk.green;
+      case 'yellow': return chalk.yellow;
+      case 'cyan': return chalk.cyan;
+      case 'grey': return chalk.gray;
+      case 'magenta': return chalk.magenta;
+      default: return chalk.white;
     }
-}
+  }
 }
