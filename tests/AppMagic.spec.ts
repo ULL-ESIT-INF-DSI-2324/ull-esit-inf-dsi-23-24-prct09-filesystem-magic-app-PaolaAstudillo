@@ -7,8 +7,7 @@ describe("MagicCardCollection Asynchronous Tests", () => {
   let collection;
 
   beforeEach(() => {
-    // Crea una instancia de MagicCardCollection antes de cada prueba.
-    // Asegúrate de usar un nombre de usuario único para evitar conflictos con archivos reales.
+
     collection = new MagicCardCollection("testUserNuevo");
   });
 
@@ -17,7 +16,7 @@ describe("MagicCardCollection Asynchronous Tests", () => {
     
     collection.addCard(card);
 
-    // Debe haber un breve retraso para permitir que el archivo se escriba.
+    // breve retraso para permitir que el archivo se escriba.
     setTimeout(() => {
       collection.listCards();
       expect(collection.getCards().has(card.id)).to.be.true;
